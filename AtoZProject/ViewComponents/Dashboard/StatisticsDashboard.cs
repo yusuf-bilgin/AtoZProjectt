@@ -17,5 +17,4 @@ namespace AtoZProject.ViewComponents.Dashboard
             return View();
         }
     }
-
 }

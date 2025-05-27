@@ -10,7 +10,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th> S. No </th>
+								<th> # </th>
 								<th> Ana Görsel </th>
 								<th> Proje Adı </th>
 								<th> URL </th>
@@ -20,19 +20,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach(var item in Model){
-								<tr>
-									<td>@item.PortfolioId</td>
-									<td><img src="@item.ProjectUrl"></td>
-									<td>@item.Name</td>
-									<td>@item.ImageUrl></td>
-									<td>@item.Price</td>
-									<td>%@item.Value</td>
-									<td>
-										<div class="badge badge-outline-success">Approved</div>
-									</td>
-								</tr>
-							}				
+							@{
+								int counter = 1;
+								@foreach (var item in Model)
+								{
+									<tr>
+										<td>@counter</td>
+										<td><img src="@item.ProjectUrl"></td>
+										<td>@item.Name</td>
+										<td>@item.ImageUrl></td>
+										<td>@item.Price</td>
+										<td>%@item.Value</td>
+										<td>
+											<div class="badge badge-outline-success">Approved</div>
+										</td>
+									</tr>
+									counter++;
+								}
+							}
 						</tbody>
 					</table>
 				</div>
