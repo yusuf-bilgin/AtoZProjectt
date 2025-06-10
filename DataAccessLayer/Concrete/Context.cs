@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context : IdentityDbContext<WriterUser,WriterRole,int>
+    public class Context : IdentityDbContext<WriterUser, WriterRole, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,5 +33,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<User> Users { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<ToDoList> ToDoLists { get; set; }
+        public DbSet<test1> test1s { get; set; }
     }
 }
