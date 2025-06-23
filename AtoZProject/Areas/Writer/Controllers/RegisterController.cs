@@ -34,17 +34,21 @@ namespace AtoZProject.Areas.Writer.Controllers
                     UserName = p.UserName,
                     ImageUrl = p.ImageUrl
                 };
-                var result = await _userManager.CreateAsync(writerUser, p.Password);
 
-                if (result.Succeeded)
+                if (p.ConfirmPassword == p.Password)
                 {
-                    return RedirectToAction("Index", "Login");
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
+                    var result = await _userManager.CreateAsync(writerUser, p.Password);
+
+                    if (result.Succeeded)
                     {
-                        ModelState.AddModelError("", error.Description);
+                        return RedirectToAction("Index", "Login");
+                    }
+                    else
+                    {
+                        foreach (var error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
             }
