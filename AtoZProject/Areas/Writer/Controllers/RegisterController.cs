@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]/[action]")]
     public class RegisterController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;
@@ -21,38 +22,36 @@ namespace AtoZProject.Areas.Writer.Controllers
         {
             return View(new UserRegisterViewModel());
         }
+
         [HttpPost]
         public async Task<IActionResult> Index(UserRegisterViewModel p)
         {
-            if (ModelState.IsValid)
+            WriterUser writer = new WriterUser()
             {
-                WriterUser writerUser = new WriterUser()
-                {
-                    Name = p.Name,
-                    Surname = p.Surname,
-                    Email = p.Mail,
-                    UserName = p.UserName,
-                    ImageUrl = p.ImageUrl
-                };
+                Name = p.Name,
+                Surname = p.Surname,
+                Email = p.Mail,
+                UserName = p.UserName,
+                ImageUrl = p.ImageUrl
+            };
 
-                if (p.ConfirmPassword == p.Password)
-                {
-                    var result = await _userManager.CreateAsync(writerUser, p.Password);
+            if (p.Password == p.ConfirmPassword)
+            {
+                var result = await _userManager.CreateAsync(writer, p.Password);
 
-                    if (result.Succeeded)
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Login");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
                     {
-                        return RedirectToAction("Index", "Login");
-                    }
-                    else
-                    {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
+                        ModelState.AddModelError("", item.Description);
                     }
                 }
             }
-            return View();
+            return View(p);
         }
     }
 }

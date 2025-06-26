@@ -45,16 +45,28 @@ namespace AtoZProject
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
-
             app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    // Area route'u once gelmeli
+            //    endpoints.MapControllerRoute(
+            //        name: "areas",
+            //        pattern: "{area:exists}/{controller=Default}/{action=Index}/{id?}");
+
+            //    // Varsayilan route
+            //    endpoints.MapControllerRoute(
+            //        name: "default",
+            //        pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+            //});
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseEndpoints(endpoints =>
