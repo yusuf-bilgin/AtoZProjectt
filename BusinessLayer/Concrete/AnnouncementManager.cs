@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLayer.Abstract;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Concrete
 {
     public class AnnouncementManager : IAnnouncementService
     {
-        IAnnouncementService _announcementService;
+        IAnnouncementDal _announcementDal;
 
-        public AnnouncementManager(IAnnouncementService announcementService)
+        public AnnouncementManager(IAnnouncementDal announcementDal)
         {
-            _announcementService = announcementService;
+            _announcementDal = announcementDal;
         }
 
         public void TAdd(Announcement t)
@@ -34,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public List<Announcement> TGetList()
         {
-            return _announcementService.TGetList();
+            return _announcementDal.GetList();
         }
 
         public void TUpdate(Announcement t)
