@@ -20,6 +20,7 @@
 							<th>Başlık</th>
 							<th>Tarih</th>
 							<th>Tür</th>
+							<th>Detaylar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,10 +43,11 @@
 								color = "badge badge-success";
 							}
 							<tr>
-								<td>@item.Id</td>
+								<th>@item.Id</th>
 								<td>@item.Title</td>
-								<td>@item.Date</td>
+								<td>@(((DateTime)item.Date).ToString("dd-MMM-yyyy"))</td>
 								<td><label class="@color">@item.Status</label></td>
+								<td><a href="/Writer/Default/AnnouncementDetails/@item.Id" class="btn btn-outline-primary">Detaylar</a></td>
 							</tr>
 						}
 					</tbody>
