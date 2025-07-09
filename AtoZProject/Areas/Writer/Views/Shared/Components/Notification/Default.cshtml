@@ -1,0 +1,39 @@
+﻿@using EntityLayer.Concrete
+@model List<Announcement>
+
+@{
+	string color = "";
+}
+
+<div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+	<p class="mb-0 font-weight-normal float-left dropdown-header">Bildirimler</p>
+
+	@{
+		var statusColors = new Dictionary<string, string>
+		{
+			{ "Yeni yazı", "preview-icon bg-success" },
+			{ "Project", "preview-icon bg-warning" },
+			{ "Video", "preview-icon bg-info" }
+		};
+	}
+
+	@foreach (var item in Model)
+	{
+		color = statusColors.ContainsKey(item.Status) ? statusColors[item.Status] : "preview-icon bg-secondary";
+
+		<a class="dropdown-item preview-item" href="/Writer/Default/AnnouncementDetails/@item.Id">
+			<div class="preview-thumbnail">
+				<div class="@color">
+					<i class="ti-info-alt mx-0"></i>
+				</div>
+			</div>
+			<div class="preview-item-content">
+				<h6 class="preview-subject font-weight-normal">@item.Title</h6>
+				<p class="font-weight-light small-text mb-0 text-muted">
+					@item.Status
+				</p>
+			</div>
+		</a>
+	}
+
+</div>
