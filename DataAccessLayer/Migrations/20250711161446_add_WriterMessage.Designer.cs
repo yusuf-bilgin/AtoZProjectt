@@ -4,14 +4,16 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250711161446_add_WriterMessage")]
+    partial class add_WriterMessage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -394,11 +396,11 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("MessageContent")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Receiver")
                         .HasColumnType("nvarchar(max)");
@@ -411,7 +413,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("WriterMessageId");
 
-                    b.ToTable("WriterMessages");
+                    b.ToTable("writerMessages");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.WriterRole", b =>
