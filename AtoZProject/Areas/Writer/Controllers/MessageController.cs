@@ -6,7 +6,7 @@ namespace AtoZProject.Areas.Writer.Controllers
     {
         [Area("Writer")]
         public IActionResult Index()
-        {
+        { 
             return View();
         }
     }
