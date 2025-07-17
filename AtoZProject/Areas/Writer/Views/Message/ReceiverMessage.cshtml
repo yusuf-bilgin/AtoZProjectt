@@ -1,12 +1,12 @@
 ﻿@using EntityLayer.Concrete
 @model List<WriterMessage>
 @{
-    ViewData["Title"] = "Index";
+	ViewData["Title"] = "ReceiverMessage";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 @{
 	string color = "";
-}}
+}
 
 <div class="col-lg-12 grid-margin stretch-card">
 	<div class="card">
@@ -45,7 +45,7 @@
 								<th>@item.WriterMessageId</th>
 								<td>@item.Subject</td>
 								<td>@(((DateTime)item.Date).ToString("dd-MMM-yyyy"))</td>
-								<td><a href="/Writer/Default/AnnouncementDetails/@item.WriterMessageId" class="btn btn-outline-primary">Detaylar</a></td>
+								<td><a href="/Writer/Default/AnnouncementDetails/@item.WriterMessageId" class="btn btn-outline-primary">Mesajı Göster</a></td>
 							</tr>
 						}
 					</tbody>
