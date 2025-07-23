@@ -121,7 +121,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Writer\Data\" />
-    <Folder Include="wwwroot\userImage\" />
   </ItemGroup>
 
 </Project>

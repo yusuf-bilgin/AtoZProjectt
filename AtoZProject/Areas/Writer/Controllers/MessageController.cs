@@ -33,5 +33,18 @@ namespace AtoZProject.Areas.Writer.Controllers
             var messageList = _messageManager.GetListSenderMessage(p); // Get messages where the sender is the logged-in user
             return View(messageList);
         }
+
+        [HttpGet]
+        public IActionResult SenderMessageDetails(int id)
+        {
+            WriterMessage writerMessage = _messageManager.TGetByID(id);
+            return View(writerMessage);
+        }
+        [HttpGet]
+        public IActionResult ReceiverMessageDetails(int id)
+        {
+            WriterMessage writerMessage = _messageManager.TGetByID(id);
+            return View(writerMessage);
+        }
     }
 }
