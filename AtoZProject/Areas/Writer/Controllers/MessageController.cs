@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using BusinessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
@@ -20,7 +21,7 @@ namespace AtoZProject.Areas.Writer.Controllers
         }
 
         public async Task<IActionResult> ReceiverMessage(string p)
-        { 
+        {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             p = values.Email;
             var messageList = _messageManager.GetListReceiverMessage(p); // Get messages where the receiver is the logged-in user
@@ -45,6 +46,24 @@ namespace AtoZProject.Areas.Writer.Controllers
         {
             WriterMessage writerMessage = _messageManager.TGetByID(id);
             return View(writerMessage);
+        }
+
+        [HttpGet]
+        public IActionResult SendMessage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SendMessage(WriterMessage p)
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            string mail = values.Email;
+            string name = values.Name + " " + values.Surname;
+            p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            p.Sender = mail;
+            p.SenderName = name;
+            _messageManager.TAdd(p);
+            return RedirectToAction("SenderMessage", "Message");
         }
     }
 }
