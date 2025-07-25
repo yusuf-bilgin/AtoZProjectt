@@ -4,12 +4,14 @@ using System.IO;
 using System.Threading.Tasks;
 using AtoZProject.Areas.Writer.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Authorize]
     public class ProfileController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;
@@ -48,15 +50,13 @@ namespace AtoZProject.Areas.Writer.Controllers
                 }
                 user.ImageUrl = imageName;
             }
-            //else
-            //{
-            //    user.ImageUrl = user.ImageUrl; // Keep the existing image if no new one is uploaded
-            //}
+
             user.Name = p.Name;
             user.Surname = p.Surname;
-            if (!string.IsNullOrEmpty(p.Password) && p.Password == p.PasswordConfirm)
+
+            if (!string.IsNullOrEmpty(p.Password) && p.Password == p.PasswordConfirm) 
             {
-                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);  
             }
             else if (!string.IsNullOrEmpty(p.Password) || !string.IsNullOrEmpty(p.PasswordConfirm))
             {
@@ -76,7 +76,7 @@ namespace AtoZProject.Areas.Writer.Controllers
                 }
             }
 
-            return View(user);
+            return View(p);
         }
     }
 }
