@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]")]
+    [Route("Writer/[controller]/[action]")]
     public class LoginController : Controller
     {
         private readonly SignInManager<WriterUser> _signInManager;
@@ -30,7 +32,7 @@ namespace AtoZProject.Areas.Writer.Controllers
                 var result = await _signInManager.PasswordSignInAsync(p.UserName, p.Password, true, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Default");
+                    return RedirectToAction("Index", "Dashboard", new {area = "Writer"});
                 }
                 else
                 {

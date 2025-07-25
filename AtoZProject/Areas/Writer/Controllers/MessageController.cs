@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]")]
+    [Route("Writer/[controller]/[action]")]
     public class MessageController : Controller
     {
         WriterMessageManager _messageManager = new WriterMessageManager(new EfWriterMessageDal());
@@ -69,7 +71,7 @@ namespace AtoZProject.Areas.Writer.Controllers
             var userNameSurname = c.Users.Where(x => x.Email == p.ReceiverMail).Select(y => y.Name + " " + y.Surname).FirstOrDefault();
             p.ReceiverName = userNameSurname ?? "Unknown";
             _messageManager.TAdd(p);
-            return RedirectToAction("SenderMessage", "Message");
+            return RedirectToAction("SenderMessage", "Message", new {area = "Writer"});
         }
     }
 }

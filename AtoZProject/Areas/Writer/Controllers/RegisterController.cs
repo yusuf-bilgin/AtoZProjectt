@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[controller]")]
     [Route("Writer/[controller]/[action]")]
     public class RegisterController : Controller
     {

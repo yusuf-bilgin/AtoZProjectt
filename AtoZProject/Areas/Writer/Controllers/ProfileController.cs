@@ -12,6 +12,8 @@ namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Authorize]
+    [Route("Writer/[controller]")]
+    [Route("Writer/[controller]/[action]")]
     public class ProfileController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;
@@ -54,9 +56,9 @@ namespace AtoZProject.Areas.Writer.Controllers
             user.Name = p.Name;
             user.Surname = p.Surname;
 
-            if (!string.IsNullOrEmpty(p.Password) && p.Password == p.PasswordConfirm) 
+            if (!string.IsNullOrEmpty(p.Password) && p.Password == p.PasswordConfirm)
             {
-                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);  
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, p.Password);
             }
             else if (!string.IsNullOrEmpty(p.Password) || !string.IsNullOrEmpty(p.PasswordConfirm))
             {
@@ -66,7 +68,7 @@ namespace AtoZProject.Areas.Writer.Controllers
             var result = await _userManager.UpdateAsync(user);
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Default");
+                return RedirectToAction("Index", "Default", new { area = "Writer" });
             }
             else
             {
