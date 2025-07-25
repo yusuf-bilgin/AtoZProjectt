@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -62,6 +64,10 @@ namespace AtoZProject.Areas.Writer.Controllers
             p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             p.Sender = mail;
             p.SenderName = name;
+
+            Context c = new Context();
+            var userNameSurname = c.Users.Where(x => x.Email == p.Receiver).Select(y => y.Name + " " + y.Surname).FirstOrDefault();
+            p.ReceiverName = userNameSurname ?? "Unknown";
             _messageManager.TAdd(p);
             return RedirectToAction("SenderMessage", "Message");
         }
