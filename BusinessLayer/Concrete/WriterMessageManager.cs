@@ -21,12 +21,12 @@ namespace BusinessLayer.Concrete
         // Göndericisi olunan mesajları listeleme
         public List<WriterMessage> GetListReceiverMessage(string p)
         {
-            return _writerMessageDal.GetByFilter(x => x.Receiver == p);
+            return _writerMessageDal.GetByFilter(x => x.ReceiverMail == p);
         }
         // Alıcısı olunan mesajları listeleme
         public List<WriterMessage> GetListSenderMessage(string p)
         {
-            return _writerMessageDal.GetByFilter(x => x.Sender == p);
+            return _writerMessageDal.GetByFilter(x => x.SenderMail == p);
         }
 
         public void TAdd(WriterMessage t)

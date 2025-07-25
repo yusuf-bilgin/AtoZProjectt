@@ -1,8 +1,8 @@
 ﻿@model EntityLayer.Concrete.WriterMessage
 
 @{
-    ViewData["Title"] = "ReceiverMessageDetails";
-    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+	ViewData["Title"] = "ReceiverMessageDetails";
+	Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
 	<div class="py-2 px-4 border-bottom d-none d-lg-block">
 		<div class="d-flex align-items-center py-1">
 			<div class="flex-grow-1 pl-3">
-				<strong>@Model.ReceiverName</strong> [@Model.Receiver]'dan <strong>@Model.SenderName</strong> [@Model.Sender] kişisine
+				<strong>@Model.ReceiverName</strong> [@Model.ReceiverMail]'dan <strong>@Model.SenderName</strong> [@Model.SenderMail] kişisine
 			</div>
 		</div>
 	</div>
@@ -47,6 +47,3 @@
 </body>
 
 </html>
-
-
-

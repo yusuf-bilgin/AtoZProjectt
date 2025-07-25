@@ -62,14 +62,15 @@ namespace AtoZProject.Areas.Writer.Controllers
             string mail = values.Email;
             string name = values.Name + " " + values.Surname;
             p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
-            p.Sender = mail;
+            p.SenderMail = mail;
             p.SenderName = name;
 
             Context c = new Context();
-            var userNameSurname = c.Users.Where(x => x.Email == p.Receiver).Select(y => y.Name + " " + y.Surname).FirstOrDefault();
+            var userNameSurname = c.Users.Where(x => x.Email == p.ReceiverMail).Select(y => y.Name + " " + y.Surname).FirstOrDefault();
             p.ReceiverName = userNameSurname ?? "Unknown";
             _messageManager.TAdd(p);
             return RedirectToAction("SenderMessage", "Message");
         }
     }
 }
+

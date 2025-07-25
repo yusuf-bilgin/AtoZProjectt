@@ -36,10 +36,10 @@ namespace AtoZProject.Areas.Writer.Controllers
 
             // Istatistik verilerini çekip ViewBag'e atama
             Context c = new Context();
-            ViewBag.v1 = 0;
+            ViewBag.v1 = c.WriterMessages.Where(x=>x.ReceiverMail== user.Email).Count(); // Alınan mesaj sayısı
             ViewBag.v2 = c.Announcements.Count();
-            ViewBag.v3 = 0;
-            ViewBag.v4 = c.Skills.Count();
+            ViewBag.v3 = c.Users.Count();
+            ViewBag.v4 = c.WriterMessages.Where(x=>x.SenderMail==user.Email).Count(); // Gönderilen mesaj sayısı
 
             return View();
         }
