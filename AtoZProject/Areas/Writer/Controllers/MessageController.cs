@@ -31,6 +31,7 @@ namespace AtoZProject.Areas.Writer.Controllers
             var messageList = _messageManager.GetListReceiverMessage(p); // Get messages where the receiver is the logged-in user
             return View(messageList);
         }
+
         public async Task<IActionResult> SenderMessage(string p)
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -39,13 +40,14 @@ namespace AtoZProject.Areas.Writer.Controllers
             return View(messageList);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult SenderMessageDetails(int id)
         {
             WriterMessage writerMessage = _messageManager.TGetByID(id);
             return View(writerMessage);
         }
-        [HttpGet]
+
+        [HttpGet("{id}")]
         public IActionResult ReceiverMessageDetails(int id)
         {
             WriterMessage writerMessage = _messageManager.TGetByID(id);
@@ -75,4 +77,3 @@ namespace AtoZProject.Areas.Writer.Controllers
         }
     }
 }
-
