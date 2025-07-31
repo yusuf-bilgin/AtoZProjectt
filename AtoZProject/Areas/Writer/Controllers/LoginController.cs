@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace AtoZProject.Areas.Writer.Controllers
 {
     [Area("Writer")]
-    [Route("Writer/[controller]")]
+    [Route("Writer/[controller]")] // Hem index hem de logout'a yönlendirmeye çalışıyor. Silersem de writer/login error 404 veriyor
     [Route("Writer/[controller]/[action]")]
     public class LoginController : Controller
     {
@@ -32,7 +32,7 @@ namespace AtoZProject.Areas.Writer.Controllers
                 var result = await _signInManager.PasswordSignInAsync(p.UserName, p.Password, true, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Dashboard", new {area = "Writer"});
+                    return RedirectToAction("Index", "Dashboard", new { area = "Writer" });
                 }
                 else
                 {
@@ -41,6 +41,12 @@ namespace AtoZProject.Areas.Writer.Controllers
             }
             return View();
         }
-    }
 
+        [HttpGet]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login", new { area = "Writer" });
+        }
+    }
 }
