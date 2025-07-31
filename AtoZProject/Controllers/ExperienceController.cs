@@ -10,9 +10,6 @@ namespace AtoZProject.Controllers
         ExperienceManager experienceManager = new ExperienceManager(new EfExperienceDal());
         public IActionResult Index()
         {
-            ViewBag.v1 = "Deneyim Ekleme";
-            ViewBag.v2 = "Deneyim";
-            ViewBag.v3 = "Deneyim Ekleme";
             var values = experienceManager.TGetList();
             return View(values);
         }
@@ -38,9 +35,6 @@ namespace AtoZProject.Controllers
         [HttpGet]
         public IActionResult EditExperience(int id)
         {
-            ViewBag.v1 = "Düzenleme";
-            ViewBag.v2 = "Deneyimler";
-            ViewBag.v3 = "Deneyim Güncelleme";
             var values = experienceManager.TGetByID(id);
             return View(values);
         }
