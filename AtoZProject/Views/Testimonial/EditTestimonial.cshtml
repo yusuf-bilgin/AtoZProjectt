@@ -1,0 +1,43 @@
+﻿@model EntityLayer.Concrete.Testimonial
+@{
+    ViewData["Title"] = "EditTestimonial";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("EditTestimonial", "Testimonial", FormMethod.Post))
+{
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<p class="card-title">Referans Düzenleme Sayfası</p>
+
+				<div class="form-group" hidden>
+					<label>ID</label>
+					@Html.TextBoxFor(x => x.TestimonialID, new { @class = "form-control" })
+				</div>
+				<div class="form-group">
+					<label>Ad Soyad</label>
+					@Html.TextBoxFor(x => x.ClientName, new { @class = "form-control" })
+				</div>
+				<div class="form-group">
+					<label>Şirket</label>
+					@Html.TextBoxFor(x => x.Company, new { @class = "form-control" })
+				</div>
+				<div class="form-group">
+					<label>Başlık</label>
+					@Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+				</div>
+				<div class="form-group">
+					<label>Resim Yolu</label>
+					@Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+				</div>
+				<div class="form-group">
+					<label>Yorum</label>
+					@Html.TextAreaFor(x => x.Comment, 8, 3, new { @class = "form-control" })
+				</div>
+				<button type="submit" class="btn btn-primary mr-2">Kaydet</button>
+				<a href="@Url.Action("Index", "Testimonial")" class="btn btn-dark">İptal</a>
+			</div>
+		</div>
+	</div>
+}
