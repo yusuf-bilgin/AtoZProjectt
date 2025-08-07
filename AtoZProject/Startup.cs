@@ -1,14 +1,18 @@
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AtoZProject
@@ -26,8 +30,22 @@ namespace AtoZProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>();
-            services.AddIdentity<WriterUser,WriterRole>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<Context>();
             services.AddControllersWithViews();
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.LoginPath = "/Writer/Login/Index";
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,19 +66,6 @@ namespace AtoZProject
             app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    // Area route'u once gelmeli
-            //    endpoints.MapControllerRoute(
-            //        name: "areas",
-            //        pattern: "{area:exists}/{controller=Default}/{action=Index}/{id?}");
-
-            //    // Varsayilan route
-            //    endpoints.MapControllerRoute(
-            //        name: "default",
-            //        pattern: "{controller=Dashboard}/{action=Index}/{id?}");
-            //});
 
             app.UseEndpoints(endpoints =>
             {

@@ -3,9 +3,11 @@ using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AtoZProject.Areas.Writer.Controllers
 {
+    [AllowAnonymous]
     [Area("Writer")]
     [Route("Writer/[controller]")] // Hem index hem de logout'a yönlendirmeye çalışıyor. Silersem de writer/login error 404 veriyor
     [Route("Writer/[controller]/[action]")]
