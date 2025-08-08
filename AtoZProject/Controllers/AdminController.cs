@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AtoZProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         public PartialViewResult PartialSideBar()

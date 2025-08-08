@@ -42,9 +42,9 @@ namespace AtoZProject
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.LoginPath = "/Writer/Login/Index";
-
+                options.AccessDeniedPath = "/ErrorPage/Index";
             });
         }
 

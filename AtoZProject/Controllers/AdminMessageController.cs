@@ -4,10 +4,12 @@ using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtoZProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminMessageController : Controller
     {
         private readonly string _adminEmail = "admin@gmail.com";
