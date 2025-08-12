@@ -1,0 +1,83 @@
+﻿@using EntityLayer.Concrete
+@model List<Experience>
+
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<div class="col-md-6">
+	<div class="p-2">
+		<button type="button" id="btnGetListAll" class="btn btn-outline-primary">Verileri Getir</button>
+		<button type="button" id="btnAdd" class="btn btn-outline-info">Kaydet</button>
+		<button type="button" id="btnGetById" class="btn btn-outline-warning">Id ile Getir</button>
+	</div>
+</div>
+
+<div class="p-2" id="listExperience"> </div>
+
+<br />
+
+<div class="col-md-12">
+	<h5>Ekleme Paneli</h5>
+	<input type="text" class="form-control" id="inpname" placeholder="İsim" />
+	<br />
+	<input type="text" class="form-control" id="inpdate" placeholder="Tarih" />
+</div>
+
+<br />
+
+<div class="col-md-12">
+	<h5>Id'ye Göre Getirme Paneli</h5>
+	<input type="text" class="form-control" id="inpid" placeholder="ID Giriniz" />
+</div>
+
+@section scripts
+{
+	<script>
+		$("#btnGetListAll").click(function(){
+			$.ajax({
+				contentType: "application/json",
+				dataType: "json",
+				type: "GET",
+				url: "/Experience2/ListExperience/",
+
+				success: function (data){
+					let values = jQuery.parseJSON(data);
+					console.log(values);
+
+					let htmlst = "<table class=table table-bordered> <tr> <th> Id </th> <th> Başlık </th> <th> Tarih </th> </tr> ";
+					$.each(values,(index, value) => {
+						htmlst += `<tr> <td>${value.ExperienceID}</td> <td>${value.Name}</td> <td>${value.Date}</td> </tr>`;
+					});
+					htmlst += "</table>";
+					$("#listExperience").html(htmlst);
+				}
+			});
+		});
+
+		$("#btnAdd").click(function () {
+			let values = {
+				Name : $("#inpname").val(),
+				Date : $("#inpdate").val()
+			};
+
+			$.ajax({
+				type: "POST",
+				url: "/Experience2/AddExperience/",
+				data: values,
+				success: function (data) {
+					let result = jQuery.parseJSON(data);
+					alert(result.Name + " isimli deneyim eklendi.");
+				}
+			});
+		});
+
+		$("#btnGetById").click(x => {
+			let id = $("#inpid").val();
+			console.log(id);
+		})
+	</script>
+}
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
