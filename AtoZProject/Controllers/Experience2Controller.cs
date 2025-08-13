@@ -43,5 +43,15 @@ namespace AtoZProject.Controllers
             return NoContent();
         }
 
+        [HttpPost]
+        public IActionResult UpdateExperience(Experience p)
+        {
+            var values = _experienceManager.TGetByID(p.ExperienceID);
+            values.Name = p.Name;
+            values.Date = p.Date;
+
+            _experienceManager.TUpdate(values);
+            return Json(new { success = true, Name = values.Name });
+        }
     }
 }

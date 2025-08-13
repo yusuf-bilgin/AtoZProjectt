@@ -45,6 +45,17 @@
 	<input type="text" class="form-control" id="inpexid" placeholder="ID Giriniz" />
 </div>
 
+<br />
+
+<div class="col-md-12">
+	<h5>Düzenleme Paneli</h5>
+	<input type="text" class="form-control" id="inpUptID" placeholder="ID Giriniz" />
+	<br />
+	<input type="text" class="form-control" id="inpUptName" placeholder="Şirket Adı" />
+	<br />
+	<input type="text" class="form-control" id="inpUptDate" placeholder="Tarih" />
+</div>
+
 @section scripts
 {
 	<script>
@@ -115,6 +126,22 @@
 				dataType: "json",
 				success: function (data) {
 					console.log("Silme işlemi başarılı.");
+				}
+			});
+		});
+
+		$("#btnUpdate").click(x => {
+			let values = {
+				ExperienceID: $("#inpUptID").val(),
+				Name: $("#inpUptName").val(),
+				Date: $("#inpUptDate").val()
+			};
+			$.ajax({
+				type: "POST",
+				url: "/Experience2/UpdateExperience/",
+				data: values,
+				success: function (data) {
+					alert("Güncellendi.");
 				}
 			});
 		});
