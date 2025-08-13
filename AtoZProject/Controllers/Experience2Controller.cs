@@ -29,11 +29,19 @@ namespace AtoZProject.Controllers
             return Json(values);
         }
 
-        [HttpPost]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int ExperienceID)
         {
-            var result = _experienceManager.TGetByID(id);
-            return View(JsonConvert.SerializeObject(result));
+            var result = _experienceManager.TGetByID(ExperienceID);
+            return Json(JsonConvert.SerializeObject(result));
         }
+
+        [HttpPost]
+        public IActionResult DeleteExperience(int id)
+        {
+            var values = _experienceManager.TGetByID(id);
+            _experienceManager.TDelete(values);
+            return NoContent();
+        }
+
     }
 }
