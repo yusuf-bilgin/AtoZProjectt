@@ -10,7 +10,7 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Skydash Admin</title>
+	<title>Kayıt Ol</title>
 	<!-- plugins:css -->
 	<link rel="stylesheet" href="~/skydash/vendors/feather/feather.css">
 	<link rel="stylesheet" href="~/skydash/vendors/ti-icons/css/themify-icons.css">
@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="~/skydash/css/vertical-layout-light/style.css">
 	<!-- endinject -->
 	<link rel="shortcut icon" href="~/skydash/images/favicon.png" />
+
 </head>
 
 <body>
@@ -36,51 +37,53 @@
 							</div>
 							<h4>Hesabınız yok mu?</h4>
 							<h6 class="font-weight-light">Hemen sisteme kaydını gerçekleştirebilirsin.</h6>
+
+							<!-- Tüm hataları özet halinde gösterecek kısım -->
+							<div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
 							<form class="pt-3" method="post">
 								<div class="form-group">
-									<label>Adınız</label>
-									<span asp-validation-for="Name" class="text-danger"></span>  
-									@* asp-validation-for değeri UserRegisterViewModel'deki ile aynı olmalı! *@
+									<label>Adınız</label>								
 									<input type="text" asp-for="Name" class="form-control" />
+									<span asp-validation-for="Name" class="text-danger"></span> @*asp-validation-for değeri UserRegisterViewModel'deki ile aynı olmalı! *@
 								</div>
 								<div class="form-group">
 									<label>Soyadınız</label>
-									<span asp-validation-for="Surname" class="text-danger"></span>
 									<input type="text" asp-for="Surname" class="form-control" />
+									<span asp-validation-for="Surname" class="text-danger"></span>
 								</div>
 								<div class="form-group">
 									<label>Görsel URL</label>
-									<span asp-validation-for="ImageUrl" class="text-danger"></span>
 									<input type="text" asp-for="ImageUrl" class="form-control" />
+									<span asp-validation-for="ImageUrl" class="text-danger"></span>
 								</div>
 								<div class="form-group">
 									<label>Şifreniz</label>
+									<input type="password" asp-for="Password" class="form-control" />
 									<span asp-validation-for="Password" class="text-danger"></span>
-									<input type="text" asp-for="Password" class="form-control" />
 								</div>
 								<div class="form-group">
 									<label>Şifre Tekrar</label>
+									<input type="password" asp-for="ConfirmPassword" class="form-control" />
 									<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-									<input type="text" asp-for="ConfirmPassword" class="form-control" />
 								</div>
 								<div class="form-group">
 									<label>Kullanıcı Adı</label>
-									<span asp-validation-for="UserName" class="text-danger"></span>
 									<input type="text" asp-for="UserName" class="form-control" />
+									<span asp-validation-for="UserName" class="text-danger"></span>
 								</div>
 								<div class="form-group">
 									<label>Mail Adresiniz</label>
-									<span asp-validation-for="Mail" class="text-danger"></span>
 									<input type="text" asp-for="Mail" class="form-control" />
+									<span asp-validation-for="Mail" class="text-danger"></span>
 								</div>
-								<div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
 								<div class="mt-3">
-									<button class="btn btn-primary">Kayıt Ol</button>
-@* 									<a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Kayıt Ol</a>
- *@								</div>
-								@* <div class="text-center mt-4 font-weight-light">
-									Already have an account? <a href="login.html" class="text-primary">Login</a>
-								</div> *@
+									<button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Kayıt Ol</button>
+								</div>
+								<div class="text-center mt-4 font-weight-light">
+									Zaten bir hesabınız var mı? <a href="/Writer/Login/Index/" class="text-primary">Giriş Yap</a>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -100,6 +103,10 @@
 	<script src="~/skydash/js/template.js"></script>
 	<script src="~/skydash/js/settings.js"></script>
 	<script src="~/skydash/js/todolist.js"></script>
+
+	<!-- Scripts (client-side validation için gerekli) -->
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 
 </html>

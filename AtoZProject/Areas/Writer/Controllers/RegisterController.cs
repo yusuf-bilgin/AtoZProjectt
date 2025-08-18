@@ -29,6 +29,12 @@ namespace AtoZProject.Areas.Writer.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(UserRegisterViewModel p)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(p); // Validation hatalarını tekrar forma döndür
+            }
+
+            // Buradan sonrası sadece valid model için çalışır
             WriterUser writer = new WriterUser()
             {
                 Name = p.Name,
@@ -38,21 +44,19 @@ namespace AtoZProject.Areas.Writer.Controllers
                 ImageUrl = p.ImageUrl
             };
 
-            if (p.Password == p.ConfirmPassword)
-            {
-                var result = await _userManager.CreateAsync(writer, p.Password);
 
-                if (result.Succeeded)
+            var result = await _userManager.CreateAsync(writer, p.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(writer, "Writer");
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
                 {
-                    await _userManager.AddToRoleAsync(writer, "Writer");
-                    return RedirectToAction("Index", "Login");
-                }
-                else
-                {
-                    foreach (var item in result.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
+                    ModelState.AddModelError("", error.Description);
                 }
             }
             return View(p);

@@ -1,3 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using AtoZProject.Identity;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -5,15 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace AtoZProject
 {
@@ -30,7 +32,11 @@ namespace AtoZProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>();
-            services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<Context>();
+            services.AddIdentity<WriterUser, WriterRole>()
+                .AddEntityFrameworkStores<Context>()
+                .AddErrorDescriber<CustomIdentityErrorDescriber>()
+                .AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
 
             services.AddMvc(config =>
@@ -52,7 +58,7 @@ namespace AtoZProject
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            { 
+            {
                 app.UseDeveloperExceptionPage();
             }
             else
