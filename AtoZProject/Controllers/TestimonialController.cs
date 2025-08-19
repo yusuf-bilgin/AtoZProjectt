@@ -14,6 +14,18 @@ namespace AtoZProject.Controllers
             return View(values);
         }
 
+        [HttpGet]
+        public IActionResult AddTestimonial()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddTestimonial(Testimonial testimonial)
+        {
+            testimonialManager.TAdd(testimonial);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult DeleteTestimonial(int id)
         {
             var values = testimonialManager.TGetByID(id);
