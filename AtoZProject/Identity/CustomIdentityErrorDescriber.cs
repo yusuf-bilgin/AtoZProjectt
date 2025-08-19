@@ -2,7 +2,7 @@
 
 namespace AtoZProject.Identity
 {
-    public class CustomIdentityErrorDescriber :IdentityErrorDescriber
+    public class CustomIdentityErrorDescriber : IdentityErrorDescriber
     {
         public override IdentityError PasswordTooShort(int length)
         {
