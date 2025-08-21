@@ -39,9 +39,14 @@ AtoZProject is a web application built with **ASP.NET Core (.NET 5)**, designed 
 
 ## Screenshots
 
-![Portfolio Screenshot](<img width="1565" height="702" alt="image" src="https://github.com/user-attachments/assets/5483d50a-11a9-4a83-96c2-e2906c20f2b2" />)
-![Writer Dashboard Screenshot](<img width="1877" height="912" alt="image" src="https://github.com/user-attachments/assets/5cca4771-943f-47ed-b86c-9b1168d7e00f" />)
-![Admin Dashboard Screenshot](<img width="1881" height="843" alt="image" src="https://github.com/user-attachments/assets/f259d600-4c08-449d-9879-bb1c734ac1cf" />)
+### 🖼️ Portfolio Page
+![Portfolio Screenshot](...)
+
+### ✍️ Writer Dashboard
+![Writer Dashboard Screenshot](...)
+
+### 🛠️ Admin Dashboard
+![Admin Dashboard Screenshot](...)
 
 ## Credits
 
